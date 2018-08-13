@@ -319,8 +319,17 @@ func NewMnemonicWords(bitLength int) (*Mnemonic, error) {
 		} else {
 			return nil, err
 		}
-
 	}
 
 	return m, nil
+}
+
+func SeedFromMnemonicWords(words []string, passphrase string) []byte {
+	seed := make([]byte, 0)
+
+	return seed
+}
+
+func MnemonicToEntropy(words []string, passphrase string) []byte {
+	return nil
 }
