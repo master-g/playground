@@ -12,5 +12,5 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(m.Words[0])
+	fmt.Println(m.Words)
 }

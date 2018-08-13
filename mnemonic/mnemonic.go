@@ -2,8 +2,8 @@ package mnemonic
 
 import (
 	"crypto/sha256"
-	"encoding/hex"
 	"errors"
+	"strconv"
 	"strings"
 )
 
@@ -295,13 +295,6 @@ func NewMnemonicWords(bitLength int) (*Mnemonic, error) {
 		return nil, err
 	}
 
-	bitArray2, err := hex.DecodeString("f8f7c5fa92d77b7cbf8909f936ad3329")
-	if err != nil {
-		return nil, err
-	}
-
-	bitArray = &bitArray2
-
 	hash := sha256.Sum256(*bitArray)
 
 	m := &Mnemonic{
@@ -318,7 +311,16 @@ func NewMnemonicWords(bitLength int) (*Mnemonic, error) {
 	}
 	checksumStr := byte2string[m.checksum]
 	sb.WriteString(checksumStr[0:m.checksumBits])
-	m.Words[0] = sb.String()
+
+	binaryString := sb.String()
+	for i := 0; i < len(binaryString)/bitsPerWord; i++ {
+		if v, err := strconv.ParseInt(binaryString[i*11:(i+1)*11], 2, 64); err == nil {
+			m.Words[i] = wordlist_en[v]
+		} else {
+			return nil, err
+		}
+
+	}
 
 	return m, nil
 }
