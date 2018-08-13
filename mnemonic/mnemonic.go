@@ -310,7 +310,6 @@ func NewMnemonicWords(bitLength int) (*Mnemonic, error) {
 		checksumBits: bitLength / checksumBytesPerBit,
 		checksum:     hash[0],
 	}
-	m.checksum = m.checksum >> uint(8-m.checksumBits)
 	m.Words = make([]string, (m.BitLength+m.checksumBits)/bitsPerWord)
 
 	sb := strings.Builder{}
