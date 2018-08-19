@@ -1,16 +1,9 @@
 package main
 
 import (
-	"fmt"
-	"log"
-
-	"github.com/master-g/playground/mnemonic"
+	"github.com/master-g/playground/timer"
 )
 
 func main() {
-	m, err := mnemonic.NewMnemonicWords(128)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(m.Words)
+	timer.Entry()
 }
