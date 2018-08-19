@@ -13,7 +13,7 @@ const (
 	BYTES_OF_256_BITS = 32
 )
 
-func byteSizeOfBits(bitLen int) (l int) {
+func byteSizeOfBits(bitLen uint) (l uint) {
 	l = bitLen / 8
 	if bitLen%8 != 0 {
 		l++
@@ -21,12 +21,12 @@ func byteSizeOfBits(bitLen int) (l int) {
 	return
 }
 
-func NewRandomBytes(size int) (*[]byte, error) {
+func NewRandomBytes(size uint) (*[]byte, error) {
 	data := make([]byte, size)
 	_, err := io.ReadFull(rand.Reader, data[:])
 	return &data, err
 }
 
-func NewRandomBits(bitLen int) (*[]byte, error) {
+func NewRandomBits(bitLen uint) (*[]byte, error) {
 	return NewRandomBytes(byteSizeOfBits(bitLen))
 }

@@ -1,14 +1,9 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/lopnur/lnutils/signal"
-	"github.com/master-g/playground/timer"
+	"github.com/master-g/playground/binary"
 )
 
 func main() {
-	go timer.Entry()
-	fmt.Println("wow")
-	<-signal.InterruptChan
+	binary.Entry()
 }
