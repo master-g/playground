@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/master-g/playground/binary"
+	"github.com/master-g/playground/redis"
 )
 
 func main() {
-	binary.Entry()
+	redis.Entry()
 }
