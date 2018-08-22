@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/master-g/playground/redis"
+	"github.com/master-g/playground/backt"
 )
 
 func main() {
-	redis.Entry()
+	backt.Entry()
 }

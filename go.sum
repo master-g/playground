@@ -1,8 +1,11 @@
 github.com/gomodule/redigo v2.0.0+incompatible h1:K/R+8tc58AaqLkqG2Ol3Qk+DR/TlNuhuh457pBFPtt0=
 github.com/gomodule/redigo v2.0.0+incompatible/go.mod h1:B4C85qUVwatsJoIUNIfCRsp7qO0iAmpGFZ4EELWSbC4=
+github.com/jpillora/backoff v0.0.0-20170918002102-8eab2debe79d h1:ix3WmphUvN0GDd0DO9MH0v6/5xTv+Xm1bPN+1UJn58k=
+github.com/jpillora/backoff v0.0.0-20170918002102-8eab2debe79d/go.mod h1:2iMrUgbbvHEiQClaW2NsSzMyGHqN+rDFqY705q49KG0=
 github.com/lopnur/lnutils v0.0.0-20180807123251-aa014ce4b5df h1:cXPcGWkCRm6uyUYdK4IPFo7lyuPnMHVnEq4+2eLwQ5g=
 github.com/lopnur/lnutils v0.0.0-20180807123251-aa014ce4b5df/go.mod h1:UrdNx6rjHPE4ldfxWF44UGUGqBl5jP3qOxi9vQi94vg=
 github.com/lopnur/lnutils v0.0.0-20180820091557-9d7e93ee40e3 h1:sS7keAt5grQb4ST+qL2ST2t0g2kLSoNo95PFqpGZvds=
 github.com/lopnur/lnutils v0.0.0-20180820091557-9d7e93ee40e3/go.mod h1:Bq1DYxJvA32lKdGxRuDDNxXNpwmtEKKctDPwe95CjmM=
 golang.org/x/crypto v0.0.0-20180723164146-c126467f60eb/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
 golang.org/x/crypto v0.0.0-20180816225734-aabede6cba87/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
+golang.org/x/crypto v0.0.0-20180820150726-614d502a4dac/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=

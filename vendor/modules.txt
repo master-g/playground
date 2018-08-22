@@ -1,5 +1,7 @@
 # github.com/gomodule/redigo v2.0.0+incompatible
 github.com/gomodule/redigo/redis
 github.com/gomodule/redigo/internal
+# github.com/jpillora/backoff v0.0.0-20170918002102-8eab2debe79d
+github.com/jpillora/backoff
 # github.com/lopnur/lnutils v0.0.0-20180820091557-9d7e93ee40e3
 github.com/lopnur/lnutils/signal
