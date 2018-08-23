@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/master-g/playground/backt"
+	"github.com/master-g/playground/socket"
 )
 
 func main() {
-	backt.Entry()
+	socket.Entry()
 }
