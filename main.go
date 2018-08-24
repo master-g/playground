@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/master-g/playground/socket"
+	"github.com/master-g/playground/agent"
 )
 
 func main() {
-	socket.Entry()
+	agent.Entry()
 }
