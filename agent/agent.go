@@ -6,7 +6,6 @@ import (
 
 	"github.com/lopnur/lnutils/signal"
 	log "github.com/sirupsen/logrus"
-	"go.uber.org/zap"
 )
 
 const (
@@ -38,7 +37,7 @@ func agent(wg *sync.WaitGroup, s *Session, in chan []byte, out *Sender) {
 		case msg, ok := <-in:
 			// process packet from network
 			if !ok {
-				log.Info("incoming packet channel full/or closed, session %v", s.String())
+				log.Infof("incoming packet channel full/or closed, session %v", s.String())
 				s.SetFlagKicked()
 				break
 			} else {
@@ -46,6 +45,8 @@ func agent(wg *sync.WaitGroup, s *Session, in chan []byte, out *Sender) {
 				s.PacketCount++
 				s.PacketCountPerMin++
 				s.PacketTime = time.Now()
+
+				// s.SetFlagKicked()
 
 				// route
 				echo := []byte("echo ")
@@ -75,6 +76,6 @@ func agent(wg *sync.WaitGroup, s *Session, in chan []byte, out *Sender) {
 func sendPacket(s *Session, buf *Sender, pkg []byte) {
 	err := buf.EnqueueOutgoing(pkg)
 	if err != nil {
-		log.Error("error while sending", zap.String("sess", s.String()), zap.Error(err))
+		log.Errorf("error while sending, session %v error %v", s.String(), err)
 	}
 }

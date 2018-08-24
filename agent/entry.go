@@ -21,11 +21,11 @@ func Entry() {
 		printUsage()
 	}
 	if strings.ToLower(os.Args[1]) == "server" {
-		fmt.Println("server")
 		startServer()
 		log.Info("bye")
 	} else if strings.ToLower(os.Args[1]) == "client" {
-		fmt.Println("client")
+		startClient()
+		log.Info("bye")
 	} else {
 		printUsage()
 	}
@@ -34,7 +34,7 @@ func Entry() {
 func startServer() {
 	go StartTCP(&Config{
 		Port:             8888,
-		ReadDeadLine:     10 * time.Second,
+		ReadDeadLine:     60 * time.Second,
 		ReadBufferSize:   32768,
 		WriteDeadLine:    10 * time.Second,
 		WriteBufferSize:  32768,
@@ -46,4 +46,10 @@ func startServer() {
 	go signal.Start()
 	<-signal.InterruptChan
 	WaitTCPShutdown()
+}
+
+func startClient() {
+	go StartTCPClient()
+	go signal.Start()
+	<-signal.InterruptChan
 }

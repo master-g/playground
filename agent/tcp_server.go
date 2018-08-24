@@ -29,6 +29,10 @@ var (
 	config *Config
 )
 
+func init() {
+	wg = &sync.WaitGroup{}
+}
+
 // WaitTCPShutdown waits all connection to close
 func WaitTCPShutdown() {
 	wg.Wait()
@@ -38,7 +42,7 @@ func WaitTCPShutdown() {
 func StartTCP(cfg *Config) {
 	defer signal.RequestInterrupt()
 	if cfg == nil {
-		log.Warn("nil config")
+		log.Error("nil config")
 		return
 	}
 	config = cfg
@@ -93,7 +97,7 @@ func handleTCPConnection(conn net.Conn) {
 	}
 
 	sess := NewSession(net.ParseIP(host), port, config.RPMLimit)
-	log.Info("new connection %v", sess.String())
+	log.Infof("new connection %v", sess.String())
 
 	// create sender and start sending loop
 	out := NewSender(sess.Die, config.TxQueueLength, config.SessionCacheSize, func(data []byte) (n int, err error) {
@@ -115,7 +119,7 @@ func handleTCPConnection(conn net.Conn) {
 		// read packet size
 		n, err := io.ReadFull(conn, packetSize)
 		if err != nil {
-			log.Errorf("read packet size failed, session %v", sess.String())
+			log.Errorf("read packet size failed, error %v session %v", err, sess.String())
 			return
 		}
 		size := binary.BigEndian.Uint16(packetSize)
