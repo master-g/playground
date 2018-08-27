@@ -22,8 +22,12 @@ func agent(wg *sync.WaitGroup, s *Session, in chan []byte, out *Sender) {
 	s.Push = make(chan []byte, defaultPushQueueSize)
 	s.ConnectTime = time.Now()
 	s.LastPacketTime = time.Now()
-	// minute timer
-	rpmLimitTicker := time.NewTicker(time.Minute)
+	// auth timeout
+	authTimer := time.NewTimer(time.Second * 8)
+	defer authTimer.Stop()
+	// RPM limit
+	minuteTicker := time.NewTicker(time.Minute)
+	defer minuteTicker.Stop()
 
 	// cleanup
 	defer func() {
@@ -41,26 +45,39 @@ func agent(wg *sync.WaitGroup, s *Session, in chan []byte, out *Sender) {
 				s.SetFlagKicked()
 				break
 			} else {
-				// route packet
+				// update session status
 				s.PacketCount++
 				s.PacketCountPerMin++
-				s.PacketTime = time.Now()
-
-				// s.SetFlagKicked()
-
-				// route
-				echo := []byte("echo ")
-				response := append(echo, msg...)
-				sendPacket(s, out, response)
 				s.LastPacketTime = time.Now()
+
+				s.SetFlagAuth()
+
+				// check for RPM violation
+				if s.CheckRPMLimitViolation() {
+					s.SetFlagKicked()
+					sendPacket(s, out, []byte("rpm limit violation"))
+				} else {
+					// route
+					echo := []byte("echo ")
+					response := append(echo, msg...)
+					sendPacket(s, out, response)
+				}
 			}
 		case msg := <-s.Push:
 			// internal push
 			sendPacket(s, out, msg)
 		case frame := <-s.MQ:
 			sendPacket(s, out, frame)
-		case <-rpmLimitTicker.C:
-			s.TimeWork()
+		case <-minuteTicker.C:
+			s.PacketCountPerMin = 0
+		case <-authTimer.C:
+			// auth timeout
+			if !s.IsFlagAuthSet() {
+				sendPacket(s, out, []byte("auth timeout"))
+				s.SetFlagKicked()
+			} else {
+				authTimer.Stop()
+			}
 		case <-signal.InterruptChan:
 			// server is manually shutting down
 			s.SetFlagKicked()

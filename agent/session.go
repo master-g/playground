@@ -14,6 +14,8 @@ type Flag int32
 const (
 	// FlagKicked indicates the client has been kicked out
 	FlagKicked = 0x4
+	// FlagAuth indicates the session has been authorized
+	FlagAuth = 0x8
 )
 
 // Session holds the context of a client having conversation with agent
@@ -23,12 +25,12 @@ type Session struct {
 	IP                net.IP
 	Port              string
 	MQ                chan []byte
+	Push              chan []byte
 	ConnectTime       time.Time
 	PacketTime        time.Time
 	LastPacketTime    time.Time
-	PacketCount       uint32
+	PacketCount       int
 	PacketCountPerMin int
-	Push              chan []byte
 	RPMLimit          int
 }
 
@@ -42,6 +44,23 @@ func NewSession(ip net.IP, port string, rpmLimit int) *Session {
 	}
 
 	return s
+}
+
+// SetFlagAuth sets the auth bit
+func (s *Session) SetFlagAuth() *Session {
+	s.flag |= FlagAuth
+	return s
+}
+
+// ClearFlagAuth clears the auth bit
+func (s *Session) ClearFlagAuth() *Session {
+	s.flag &^= FlagAuth
+	return s
+}
+
+// IsFlagAuthSet returns true if the auth bit is set
+func (s *Session) IsFlagAuthSet() bool {
+	return s.flag&FlagAuth != 0
 }
 
 // SetFlagKicked sets the kicked bit
@@ -61,17 +80,13 @@ func (s *Session) IsFlagKickedSet() bool {
 	return s.flag&FlagKicked != 0
 }
 
-// TimeWork checks rpm limit
-func (s *Session) TimeWork() {
-	defer func() {
-		s.PacketCountPerMin = 0
-	}()
-
-	// rpm control
+// CheckRPMLimitViolation returns true if session violates RPM limitation
+func (s *Session) CheckRPMLimitViolation() bool {
 	if s.PacketCountPerMin > s.RPMLimit {
-		s.SetFlagKicked()
-		log.Errorf("RPM violation %v", s.String())
-		return
+		log.Infof("RPM violation, session: %v, rate: %v, total: %v", s.String(), s.PacketCountPerMin, s.PacketCount)
+		return true
+	} else {
+		return false
 	}
 }
 
