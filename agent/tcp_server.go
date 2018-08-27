@@ -97,6 +97,7 @@ func handleTCPConnection(conn net.Conn) {
 	}
 
 	sess := NewSession(net.ParseIP(host), port, config.RPMLimit)
+	go sess.FetchLoop()
 	log.Infof("new connection %v", sess.String())
 
 	// create sender and start sending loop
