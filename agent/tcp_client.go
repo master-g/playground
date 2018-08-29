@@ -93,12 +93,13 @@ func handleIncomingPacket(ctrl chan struct{}, in chan []byte) {
 }
 
 func tick(out *Sender) {
-	ticker := time.NewTicker(time.Millisecond * 100)
+	ticker := time.NewTicker(time.Minute * 10)
 	defer ticker.Stop()
 
 	for {
 		select {
 		case <-ticker.C:
+			log.Info("sending...")
 			out.EnqueueOutgoing([]byte(time.Now().String()))
 		}
 	}

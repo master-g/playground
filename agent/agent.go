@@ -23,7 +23,7 @@ func agent(wg *sync.WaitGroup, s *Session, in chan []byte, out *Sender) {
 	s.ConnectTime = time.Now()
 	s.LastPacketTime = time.Now()
 	// auth timeout
-	authTimer := time.NewTimer(time.Second * 8)
+	authTimer := time.NewTimer(config.AuthTimeout)
 	defer authTimer.Stop()
 	// RPM limit
 	minuteTicker := time.NewTicker(time.Minute)
@@ -72,14 +72,15 @@ func agent(wg *sync.WaitGroup, s *Session, in chan []byte, out *Sender) {
 			s.PacketCountPerMin = 0
 		case <-authTimer.C:
 			// auth timeout
+			authTimer.Stop()
 			if !s.IsFlagAuthSet() {
+				log.Infof("auth timeout %v", s.String())
 				sendPacket(s, out, []byte("auth timeout"))
 				s.SetFlagKicked()
-			} else {
-				authTimer.Stop()
 			}
 		case <-signal.InterruptChan:
 			// server is manually shutting down
+			sendPacket(s, out, []byte("server shutting down"))
 			s.SetFlagKicked()
 		}
 

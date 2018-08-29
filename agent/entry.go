@@ -41,6 +41,8 @@ func startServer() {
 		SessionCacheSize: 32768,
 		TxQueueLength:    128,
 		RPMLimit:         200,
+		AuthTimeout:      1 * time.Second,
+		CloseTimeout:     1 * time.Second,
 	})
 
 	go signal.Start()

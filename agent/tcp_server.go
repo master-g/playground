@@ -22,6 +22,8 @@ type Config struct {
 	SessionCacheSize int
 	TxQueueLength    int
 	RPMLimit         int
+	AuthTimeout      time.Duration
+	CloseTimeout     time.Duration
 }
 
 var (
@@ -112,6 +114,15 @@ func handleTCPConnection(conn net.Conn) {
 
 	// packet size
 	packetSize := make([]byte, 2)
+
+	// killer
+	if config.CloseTimeout != 0 {
+		go func() {
+			<-sess.Die
+			time.Sleep(config.CloseTimeout)
+			conn.Close()
+		}()
+	}
 
 	for {
 		// solve dead link problem
