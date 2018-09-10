@@ -7,6 +7,7 @@ import (
 	"github.com/master-g/playground/mnemonic"
 )
 
+// Entry for this package
 func Entry() {
 	m, err := mnemonic.NewMnemonicWords(128)
 	if err != nil {

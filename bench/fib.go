@@ -1,5 +1,6 @@
 package bench
 
+// Fib fibonacci
 func Fib(n int) int {
 	if n < 2 {
 		return n

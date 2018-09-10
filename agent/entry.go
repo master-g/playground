@@ -1,9 +1,9 @@
 package agent
 
 import (
+	"flag"
 	"fmt"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/lopnur/lnutils/signal"
@@ -17,17 +17,21 @@ func printUsage() {
 
 // Entry for agent module
 func Entry() {
-	if len(os.Args) < 2 {
+	serverFlag := flag.Bool("server", false, "run in server mode")
+	clientFlag := flag.Bool("client", false, "run in client mode")
+
+	flag.Parse()
+
+	if *serverFlag == *clientFlag {
 		printUsage()
 	}
-	if strings.ToLower(os.Args[1]) == "server" {
+
+	if *serverFlag {
 		startServer()
 		log.Info("bye")
-	} else if strings.ToLower(os.Args[1]) == "client" {
+	} else {
 		startClient()
 		log.Info("bye")
-	} else {
-		printUsage()
 	}
 }
 

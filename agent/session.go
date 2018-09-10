@@ -85,9 +85,9 @@ func (s *Session) CheckRPMLimitViolation() bool {
 	if s.PacketCountPerMin > s.RPMLimit {
 		log.Infof("RPM violation, session: %v, rate: %v, total: %v", s.String(), s.PacketCountPerMin, s.PacketCount)
 		return true
-	} else {
-		return false
 	}
+
+	return false
 }
 
 // FetchLoop fetches streams from game service

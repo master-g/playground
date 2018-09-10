@@ -5,6 +5,7 @@ import (
 	"log"
 )
 
+// Entry for this package
 func Entry() {
 	m, err := NewMnemonicWords(128)
 	if err != nil {

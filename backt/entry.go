@@ -7,6 +7,7 @@ import (
 	"github.com/jpillora/backoff"
 )
 
+// Entry for this package
 func Entry() {
 	b := &backoff.Backoff{
 		// These are the defaults
