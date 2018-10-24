@@ -1,28 +1,51 @@
 package backt
 
 import (
-	"fmt"
-	"time"
+	"errors"
+	"math/rand"
 
-	"github.com/jpillora/backoff"
+	"github.com/cenkalti/backoff"
+	"github.com/lopnur/kroran/pkg/signal"
+	log "github.com/sirupsen/logrus"
 )
 
 // Entry for this package
 func Entry() {
-	b := &backoff.Backoff{
-		// These are the defaults
-		Min:    100 * time.Millisecond,
-		Max:    10 * time.Second,
-		Factor: 2,
-		Jitter: true,
+	go signal.Start()
+	go worker()
+
+	<-signal.InterruptChan
+	log.Info("bye~")
+}
+
+func worker() {
+	b := backoff.NewExponentialBackOff()
+	ticker := backoff.NewTicker(b)
+	defer ticker.Stop()
+	var err error
+
+	for {
+		select {
+		case <-ticker.C:
+			err = operation()
+			if err != nil {
+				log.Errorf("synchronize error %v", err)
+				i := b.NextBackOff()
+				log.Info(i)
+			} else {
+				log.Info("synchronize finished")
+				b.Reset()
+			}
+		case <-signal.InterruptChan:
+			return
+		}
 	}
+}
 
-	for i := 0; i < 20; i++ {
-		fmt.Printf("%s\n", b.Duration())
+func operation() error {
+	log.Info("op...")
+	if rand.Intn(10) < 5 {
+		return errors.New("wow")
 	}
-
-	fmt.Printf("Reset!\n")
-	b.Reset()
-
-	fmt.Printf("%s\n", b.Duration())
+	return nil
 }
