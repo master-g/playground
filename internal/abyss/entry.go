@@ -24,7 +24,7 @@ func Entry() {
 	kp2, des2 := sift.DetectAndCompute(img2, gocv.NewMat())
 
 	FLANN_INDEX_KDTREE := 1
-	flann := 
+	flann :=
 
 	window := gocv.NewWindow("Abyss")
 	window.ResizeWindow(SCREEN_WIDTH, SCREEN_HEIGHT)
