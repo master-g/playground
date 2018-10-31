@@ -1,13 +1,7 @@
 package main
 
-import (
-	"runtime"
-
-	"github.com/master-g/playground/internal/abyss"
-)
+import "github.com/master-g/playground/internal/concu"
 
 func main() {
-	runtime.LockOSThread()
-
-	abyss.Entry()
+	concu.Entry()
 }
