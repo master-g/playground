@@ -1,5 +1,15 @@
+# github.com/btcsuite/btcd v0.0.0-20181013004428-67e573d211ac
+github.com/btcsuite/btcd/btcec
 # github.com/cenkalti/backoff v2.0.0+incompatible
 github.com/cenkalti/backoff
+# github.com/ethereum/go-ethereum v1.8.17
+github.com/ethereum/go-ethereum/common/hexutil
+github.com/ethereum/go-ethereum/crypto
+github.com/ethereum/go-ethereum/crypto/sha3
+github.com/ethereum/go-ethereum/common
+github.com/ethereum/go-ethereum/common/math
+github.com/ethereum/go-ethereum/crypto/secp256k1
+github.com/ethereum/go-ethereum/rlp
 # github.com/fsnotify/fsnotify v1.4.7
 github.com/fsnotify/fsnotify
 # github.com/gomodule/redigo v2.0.0+incompatible
@@ -28,6 +38,8 @@ github.com/lopnur/lnutils/signal
 github.com/magiconair/properties
 # github.com/mitchellh/mapstructure v1.0.0
 github.com/mitchellh/mapstructure
+# github.com/onrik/ethrpc v0.0.0-20181010104327-12d6347182d4
+github.com/onrik/ethrpc
 # github.com/pelletier/go-toml v1.2.0
 github.com/pelletier/go-toml
 # github.com/sirupsen/logrus v1.1.1
@@ -45,8 +57,6 @@ github.com/spf13/jwalterweatherman
 github.com/spf13/pflag
 # github.com/spf13/viper v1.2.1
 github.com/spf13/viper
-# gocv.io/x/gocv v0.17.0
-gocv.io/x/gocv
 # golang.org/x/crypto v0.0.0-20181001203147-e3636079e1a4
 golang.org/x/crypto/ssh/terminal
 # golang.org/x/net v0.0.0-20181011144130-49bb7cea24b1
