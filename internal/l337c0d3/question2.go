@@ -51,49 +51,41 @@ func (l *ListNode) String() string {
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	n1, n2 := l1, l2
 	var result, cur *ListNode
-	var sum, overflow int
+	var sum, carry int
+	result = &ListNode{
+		Val: 0,
+	}
+	cur = result
 	for {
 		if n1 == nil && n2 == nil {
-			// no more data
-			if overflow > 0 {
-				cur.Next = &ListNode{
-					Val: overflow,
-				}
-			}
 			break
 		}
 
 		if n1 != nil && n2 != nil {
-			sum = n1.Val + n2.Val + overflow
+			sum = n1.Val + n2.Val + carry
 			n1 = n1.Next
 			n2 = n2.Next
 		} else if n1 != nil {
-			sum = n1.Val + overflow
+			sum = n1.Val + carry
 			n1 = n1.Next
 		} else {
-			sum = n2.Val + overflow
+			sum = n2.Val + carry
 			n2 = n2.Next
 		}
 
-		if sum >= 10 {
-			overflow = 1
-		} else {
-			overflow = 0
-		}
-		sum = sum % 10
-
+		carry = sum / 10
 		n := &ListNode{
-			Val:  sum,
-			Next: nil,
+			Val: sum % 10,
 		}
 
-		if result == nil {
-			result = n
-			cur = n
-		} else {
-			cur.Next = n
-			cur = n
+		cur.Next = n
+		cur = cur.Next
+	}
+
+	if carry > 0 {
+		cur.Next = &ListNode{
+			Val: carry,
 		}
 	}
-	return result
+	return result.Next
 }
