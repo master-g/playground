@@ -13,7 +13,7 @@ type ListNode struct {
 }
 
 func newListNodeFromString(str string) (list *ListNode, err error) {
-	var n *ListNode
+	var cur *ListNode
 	for i := len(str) - 1; i >= 0; i-- {
 		val := str[i] - '0'
 		if val < 0 || val > 9 {
@@ -21,14 +21,17 @@ func newListNodeFromString(str string) (list *ListNode, err error) {
 			return
 		}
 
-		n = &ListNode{
+		n := &ListNode{
 			Val:  int(val),
 			Next: nil,
 		}
 		if list == nil {
 			list = n
+			cur = list
+		} else {
+			cur.Next = n
+			cur = n
 		}
-		n = n.Next
 	}
 	return
 }
@@ -46,19 +49,15 @@ func (l *ListNode) String() string {
 }
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	n1 := l1
-	n2 := l2
-	var result *ListNode
-	r := result
-	overflow := 0
-	sum := 0
+	n1, n2 := l1, l2
+	var result, cur *ListNode
+	var sum, overflow int
 	for {
 		if n1 == nil && n2 == nil {
 			// no more data
 			if overflow > 0 {
-				r = &ListNode{
-					Val:  overflow,
-					Next: nil,
+				cur.Next = &ListNode{
+					Val: overflow,
 				}
 			}
 			break
@@ -83,12 +82,18 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		}
 		sum = sum % 10
 
-		r = &ListNode{
+		n := &ListNode{
 			Val:  sum,
 			Next: nil,
 		}
 
-		r = r.Next
+		if result == nil {
+			result = n
+			cur = n
+		} else {
+			cur.Next = n
+			cur = n
+		}
 	}
 	return result
 }

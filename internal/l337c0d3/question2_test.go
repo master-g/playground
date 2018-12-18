@@ -1,10 +1,8 @@
 package l337c0d3
 
 import (
-	"reflect"
+	"fmt"
 	"testing"
-
-	log "github.com/sirupsen/logrus"
 )
 
 func Test_newListNodeFromString(t *testing.T) {
@@ -12,26 +10,47 @@ func Test_newListNodeFromString(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	log.Info(l.String())
+	fmt.Println(l.String())
 }
 
 func Test_addTwoNumbers(t *testing.T) {
-	type args struct {
-		l1 *ListNode
-		l2 *ListNode
+	var l1 *ListNode
+	var l2 *ListNode
+
+	r := addTwoNumbers(l1, l2)
+	if r != nil {
+		t.Error("add two nil list must emit error")
 	}
-	tests := []struct {
-		name string
-		args args
-		want *ListNode
-	}{
-		// TODO: Add test cases.
+
+	var err error
+	l1, err = newListNodeFromString("1234")
+	if err != nil {
+		t.Error(err)
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := addTwoNumbers(tt.args.l1, tt.args.l2); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("addTwoNumbers() = %v, want %v", got, tt.want)
-			}
-		})
+
+	l2 = nil
+	r = addTwoNumbers(l1, l2)
+	fmt.Println(r.String())
+
+	l1, err = newListNodeFromString("876543211")
+	if err != nil {
+		t.Error(err)
 	}
+	l2, err = newListNodeFromString("123456789")
+	if err != nil {
+		t.Error(err)
+	}
+	r = addTwoNumbers(l1, l2)
+	fmt.Println(r.String())
+
+	l1, err = newListNodeFromString("342")
+	if err != nil {
+		t.Error(err)
+	}
+	l2, err = newListNodeFromString("865")
+	if err != nil {
+		t.Error(err)
+	}
+	r = addTwoNumbers(l1, l2)
+	fmt.Println(r.String())
 }
