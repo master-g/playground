@@ -3,10 +3,12 @@ package main
 import (
 	"math/rand"
 
+	"github.com/master-g/playground/internal/cfgwatch"
+
 	"github.com/sirupsen/logrus"
 )
 
-func main() {
+func premute() {
 	poolorder := make([]int, 8)
 	// loop through slice
 	for i := 1; i < len(poolorder); i++ {
@@ -16,4 +18,8 @@ func main() {
 	}
 
 	logrus.Info(poolorder)
+}
+
+func main() {
+	cfgwatch.Execute()
 }
