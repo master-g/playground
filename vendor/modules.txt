@@ -38,8 +38,6 @@ github.com/lopnur/lnutils/signal
 github.com/magiconair/properties
 # github.com/mitchellh/mapstructure v1.0.0
 github.com/mitchellh/mapstructure
-# github.com/onrik/ethrpc v0.0.0-20181010104327-12d6347182d4
-github.com/onrik/ethrpc
 # github.com/pelletier/go-toml v1.2.0
 github.com/pelletier/go-toml
 # github.com/sirupsen/logrus v1.1.1
