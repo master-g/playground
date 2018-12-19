@@ -22,6 +22,7 @@ func lengthOfLongestSubstring(s string) int {
 				curLen++
 			}
 		}
+		// TODO: do we need a flag to finish the loop ?
 		if curLen > maxLen {
 			maxLen = curLen
 		}
