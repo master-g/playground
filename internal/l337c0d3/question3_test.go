@@ -1,8 +1,18 @@
 package l337c0d3
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func Test_lengthOfLongestSubstring(t *testing.T) {
+	l := lengthOfLongestSubstring("")
+	fmt.Println(l)
+	l = lengthOfLongestSubstring("bb")
+	fmt.Println(l)
+	l = lengthOfLongestSubstring("abcdebfghijklfg")
+	fmt.Println(l)
+
 	type args struct {
 		s string
 	}
