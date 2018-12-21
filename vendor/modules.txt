@@ -36,6 +36,8 @@ github.com/lopnur/kroran/pkg/signal
 github.com/lopnur/lnutils/signal
 # github.com/magiconair/properties v1.8.0
 github.com/magiconair/properties
+# github.com/mitchellh/go-homedir v1.0.0
+github.com/mitchellh/go-homedir
 # github.com/mitchellh/mapstructure v1.0.0
 github.com/mitchellh/mapstructure
 # github.com/pelletier/go-toml v1.2.0
