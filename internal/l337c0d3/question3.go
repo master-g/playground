@@ -5,26 +5,28 @@ func lengthOfLongestSubstring(s string) int {
 	maxLen := 0
 	b := []byte(s)
 	for i := 0; i < len(b)-1; {
-		curLen := 0
+		curLen := 1
 		marks[b[i]] = i
+		duplicated := false
 		for j := i + 1; j < len(b); j++ {
-			if pos, ok := marks[b[j]]; ok {
-				if curLen > maxLen {
-					// update maxLen if needed
-					maxLen = curLen
-				}
+			pos := 0
+			if pos, duplicated = marks[b[j]]; duplicated {
 				// reset map
 				marks = make(map[byte]int)
 				// move i forward
 				i = pos + 1
 				break
 			} else {
+				marks[b[j]] = j
 				curLen++
 			}
 		}
-		// TODO: do we need a flag to finish the loop ?
 		if curLen > maxLen {
 			maxLen = curLen
+		}
+		if !duplicated {
+			// this round haven't found any duplication
+			break
 		}
 	}
 	return maxLen
