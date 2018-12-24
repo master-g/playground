@@ -8,9 +8,11 @@ import (
 func Test_lengthOfLongestSubstring(t *testing.T) {
 	l := lengthOfLongestSubstring("")
 	fmt.Println(l)
-	l = lengthOfLongestSubstring("bb")
+	l = lengthOfLongestSubstring(" ")
 	fmt.Println(l)
-	l = lengthOfLongestSubstring("abcdebfghijklfg")
+	l = lengthOfLongestSubstring("bbbbb")
+	fmt.Println(l)
+	l = lengthOfLongestSubstring("pwwkew")
 	fmt.Println(l)
 
 	type args struct {

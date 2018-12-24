@@ -12,5 +12,6 @@ require (
 	github.com/sirupsen/logrus v1.1.1
 	github.com/spf13/cobra v0.0.3
 	github.com/spf13/viper v1.2.1
+	github.com/stamblerre/gocode v0.0.0-20181212030458-2f9d39d8f31d // indirect
 	golang.org/x/net v0.0.0-20181011144130-49bb7cea24b1 // indirect
 )

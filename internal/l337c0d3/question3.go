@@ -1,33 +1,19 @@
 package l337c0d3
 
 func lengthOfLongestSubstring(s string) int {
+	// char and its position
 	marks := make(map[byte]int)
 	maxLen := 0
-	b := []byte(s)
-	for i := 0; i < len(b)-1; {
-		curLen := 1
-		marks[b[i]] = i
-		duplicated := false
-		for j := i + 1; j < len(b); j++ {
-			pos := 0
-			if pos, duplicated = marks[b[j]]; duplicated {
-				// reset map
-				marks = make(map[byte]int)
-				// move i forward
-				i = pos + 1
-				break
-			} else {
-				marks[b[j]] = j
-				curLen++
-			}
+	n := len(s)
+
+	for i, j := 0, 0; j < n; j++ {
+		if pos, duplicated := marks[s[j]]; duplicated && pos > i {
+			i = pos
 		}
-		if curLen > maxLen {
-			maxLen = curLen
+		if j-i+1 > maxLen {
+			maxLen = j - i + 1
 		}
-		if !duplicated {
-			// this round haven't found any duplication
-			break
-		}
+		marks[s[j]] = j + 1
 	}
 	return maxLen
 }
