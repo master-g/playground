@@ -1,11 +1,11 @@
 package main
 
 import (
+	"flag"
 	"math/rand"
+	"net/http"
 
-	"github.com/master-g/playground/internal/cfgwatch"
-
-	"github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
 
 func premute() {
@@ -17,9 +17,20 @@ func premute() {
 		poolorder[j] = i               // slice[j] = i
 	}
 
-	logrus.Info(poolorder)
+	log.Info(poolorder)
+}
+
+func fileServer() {
+	port := flag.String("p", "8100", "port to serve on")
+	directory := flag.String("d", ".", "directory of static files to host")
+	flag.Parse()
+
+	http.Handle("/", http.FileServer(http.Dir(*directory)))
+
+	log.Infof("Serving %v on HTTP port: %v", *directory, *port)
+	log.Fatal(http.ListenAndServe(":"+*port, nil))
 }
 
 func main() {
-	cfgwatch.Execute()
+	fileServer()
 }
