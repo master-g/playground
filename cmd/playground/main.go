@@ -2,8 +2,11 @@ package main
 
 import (
 	"flag"
+	"math"
 	"math/rand"
 	"net/http"
+
+	"github.com/master-g/playground/internal/image"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -32,5 +35,10 @@ func fileServer() {
 }
 
 func main() {
-	fileServer()
+	// fileServer()
+	image.Entry()
+}
+
+func easeOutExpo(t, b, c, d float64) float64 {
+	return c*(-math.Pow(2, -10*t/d)+1)*1024.0/1023.0 + b
 }

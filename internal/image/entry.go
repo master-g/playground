@@ -1,21 +1,15 @@
-package main
+package image
 
 import (
 	"fmt"
 	"image"
-	"image/draw"
 	"image/png"
 	"log"
 	"os"
 )
 
-const (
-	WIDTH  = 405
-	HEIGHT = 585
-)
-
 func Entry() {
-	f, err := os.Open("unoCards.png")
+	f, err := os.Open("rexpaint_cp437_10x10.png")
 	defer f.Close()
 	if err != nil {
 		log.Fatal(err)
@@ -26,12 +20,21 @@ func Entry() {
 		log.Fatal(err)
 	}
 
-	for j := 0; j < 6; j++ {
-		for i := 0; i < 10; i++ {
-			m := image.NewRGBA(image.Rect(0, 0, WIDTH, HEIGHT))
-			draw.Draw(m, m.Bounds(), img, image.Point{X: 2 + i*WIDTH + 3*i, Y: j * HEIGHT}, draw.Src)
+	for j := 0; j < 16; j++ {
+		for i := 0; i < 16; i++ {
+			m := image.NewRGBA(image.Rect(0, 0, 10, 10))
+			for y := 0; y < 16; y++ {
+				for x := 0; x < 16; x++ {
+					c := img.At(i*10+x, j*10+y)
+					r, g, b, _ := c.RGBA()
+					if r*g*b != 0 {
+						m.Set(x, y, c)
+					}
+				}
+			}
+			// draw.Draw(m, m.Bounds(), img, image.Point{X: i * 10, Y: j * 10}, draw.Src)
 
-			toImg, err := os.Create(fmt.Sprintf("%v-%v.png", j, i))
+			toImg, err := os.Create(fmt.Sprintf("%v.png", j*16+i))
 			if err != nil {
 				toImg.Close()
 				log.Fatal(err)
