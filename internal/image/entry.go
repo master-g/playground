@@ -1,14 +1,24 @@
 package image
 
 import (
+	"encoding/hex"
 	"fmt"
 	"image"
 	"image/png"
+	"io/ioutil"
 	"log"
 	"os"
 )
 
 func Entry() {
+	buf, err := ioutil.ReadFile("cp437.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(hex.EncodeToString(buf))
+}
+
+func Entry2() {
 	f, err := os.Open("rexpaint_cp437_10x10.png")
 	defer f.Close()
 	if err != nil {
