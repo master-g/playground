@@ -1,7 +1,23 @@
+# github.com/AsynkronIT/protoactor-go v0.0.0-20190709223856-3d57163d4695
+github.com/AsynkronIT/protoactor-go/actor
+github.com/AsynkronIT/protoactor-go/mailbox
+github.com/AsynkronIT/protoactor-go/eventstream
+github.com/AsynkronIT/protoactor-go/log
+github.com/AsynkronIT/protoactor-go/internal/queue/goring
+github.com/AsynkronIT/protoactor-go/internal/queue/mpsc
+# github.com/Workiva/go-datastructures v1.0.50
+github.com/Workiva/go-datastructures/queue
 # github.com/btcsuite/btcd v0.0.0-20181013004428-67e573d211ac
 github.com/btcsuite/btcd/btcec
 # github.com/cenkalti/backoff v2.0.0+incompatible
 github.com/cenkalti/backoff
+# github.com/emirpasic/gods v1.12.0
+github.com/emirpasic/gods/stacks/linkedliststack
+github.com/emirpasic/gods/containers
+github.com/emirpasic/gods/lists/singlylinkedlist
+github.com/emirpasic/gods/stacks
+github.com/emirpasic/gods/utils
+github.com/emirpasic/gods/lists
 # github.com/ethereum/go-ethereum v1.8.17
 github.com/ethereum/go-ethereum/common/hexutil
 github.com/ethereum/go-ethereum/crypto
@@ -12,6 +28,10 @@ github.com/ethereum/go-ethereum/crypto/secp256k1
 github.com/ethereum/go-ethereum/rlp
 # github.com/fsnotify/fsnotify v1.4.7
 github.com/fsnotify/fsnotify
+# github.com/gogo/protobuf v1.2.1
+github.com/gogo/protobuf/gogoproto
+github.com/gogo/protobuf/proto
+github.com/gogo/protobuf/protoc-gen-gogo/descriptor
 # github.com/gomodule/redigo v2.0.0+incompatible
 github.com/gomodule/redigo/redis
 github.com/gomodule/redigo/internal
@@ -38,8 +58,12 @@ github.com/lopnur/lnutils/signal
 github.com/magiconair/properties
 # github.com/mitchellh/go-homedir v1.0.0
 github.com/mitchellh/go-homedir
-# github.com/mitchellh/mapstructure v1.0.0
+# github.com/mitchellh/mapstructure v1.1.2
 github.com/mitchellh/mapstructure
+# github.com/oklog/run v1.0.0
+github.com/oklog/run
+# github.com/orcaman/concurrent-map v0.0.0-20190107190726-7ed82d9cb717
+github.com/orcaman/concurrent-map
 # github.com/pelletier/go-toml v1.2.0
 github.com/pelletier/go-toml
 # github.com/sirupsen/logrus v1.1.1
@@ -57,11 +81,11 @@ github.com/spf13/jwalterweatherman
 github.com/spf13/pflag
 # github.com/spf13/viper v1.2.1
 github.com/spf13/viper
-# golang.org/x/crypto v0.0.0-20181001203147-e3636079e1a4
+# golang.org/x/crypto v0.0.0-20181029021203-45a5f77698d3
 golang.org/x/crypto/ssh/terminal
-# golang.org/x/net v0.0.0-20181011144130-49bb7cea24b1
+# golang.org/x/net v0.0.0-20190213061140-3a22650c66bd
 golang.org/x/net/context
-# golang.org/x/sys v0.0.0-20180906133057-8cf3aee42992
+# golang.org/x/sys v0.0.0-20181026203630-95b1ffbd15a5
 golang.org/x/sys/unix
 golang.org/x/sys/windows
 # golang.org/x/text v0.3.0
