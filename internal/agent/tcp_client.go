@@ -26,7 +26,12 @@ func StartTCPClient() {
 }
 
 func clientLoop(conn net.Conn) {
-	defer conn.Close()
+	defer func() {
+		err := conn.Close()
+		if err != nil {
+			log.Error(err)
+		}
+	}()
 
 	packetSize := make([]byte, 2)
 	in := make(chan []byte)
@@ -100,7 +105,10 @@ func tick(out *Sender) {
 		select {
 		case <-ticker.C:
 			log.Info("sending...")
-			out.EnqueueOutgoing([]byte(time.Now().String()))
+			err := out.EnqueueOutgoing([]byte(time.Now().String()))
+			if err != nil {
+				log.Warn(err)
+			}
 		}
 	}
 }

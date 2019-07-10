@@ -2,22 +2,17 @@
 
 # format
 echo "==> Formatting..."
-goreturns -w $(find .. -type f -name '*.go' -not -path "../vendor/*")
+goimports -w $(find .. -type f -name '*.go' -not -path "../vendor/*")
 
 # mod
 echo "==> Module tidy and vendor..."
 go mod tidy
 go mod vendor
+go mod download
 
 # lint
 echo "==> Linting..."
-gometalinter	--vendor \
-				--fast \
-				--enable-gc \
-				--tests \
-				--aggregate \
-				--disable=gotype \
-				../
+golangci-lint run ../...
 
 # build
 echo "==> Building..."

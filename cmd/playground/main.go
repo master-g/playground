@@ -2,11 +2,8 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"math/rand"
 	"net/http"
-	"strconv"
-	"strings"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -35,42 +32,5 @@ func fileServer() {
 }
 
 func main() {
-	// fileServer()
-	v := 1
-	for i := 0; i < 10; i++ {
-		v *= 10
-		fmt.Println(magic(v, 7))
-	}
-}
-
-func stringifyWithComma(num int) string {
-	strNum := strconv.Itoa(num)
-	sb := &strings.Builder{}
-	for i := len(strNum) - 1; i >= 0; i-- {
-		sb.WriteByte(strNum[i])
-		if i > 0 && i%3 == 0 {
-			sb.WriteString(",")
-		}
-	}
-	return sb.String()
-}
-
-func magic(num, maxLen int) string {
-	if maxLen <= 0 {
-		return stringifyWithComma(num)
-	}
-
-	raw := stringifyWithComma(num)
-	postfix := "KMGTPEZY"
-	curPostfixIndex := -1
-	newValue := num
-	for len(raw) > maxLen {
-		newValue /= 1000
-		curPostfixIndex++
-
-		raw = stringifyWithComma(newValue)
-		raw = fmt.Sprintf("%s%s", raw, string(postfix[curPostfixIndex]))
-	}
-
-	return raw
+	fileServer()
 }
