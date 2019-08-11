@@ -1,10 +1,11 @@
 # github.com/AsynkronIT/protoactor-go v0.0.0-20190709223856-3d57163d4695
+github.com/AsynkronIT/protoactor-go/remote
 github.com/AsynkronIT/protoactor-go/actor
 github.com/AsynkronIT/protoactor-go/mailbox
 github.com/AsynkronIT/protoactor-go/eventstream
-github.com/AsynkronIT/protoactor-go/log
 github.com/AsynkronIT/protoactor-go/internal/queue/goring
 github.com/AsynkronIT/protoactor-go/internal/queue/mpsc
+github.com/AsynkronIT/protoactor-go/log
 # github.com/Workiva/go-datastructures v1.0.50
 github.com/Workiva/go-datastructures/queue
 # github.com/btcsuite/btcd v0.0.0-20181013004428-67e573d211ac
@@ -30,8 +31,17 @@ github.com/ethereum/go-ethereum/rlp
 github.com/fsnotify/fsnotify
 # github.com/gogo/protobuf v1.2.1
 github.com/gogo/protobuf/gogoproto
+github.com/gogo/protobuf/jsonpb
 github.com/gogo/protobuf/proto
+github.com/gogo/protobuf/sortkeys
 github.com/gogo/protobuf/protoc-gen-gogo/descriptor
+github.com/gogo/protobuf/types
+# github.com/golang/protobuf v1.2.0
+github.com/golang/protobuf/proto
+github.com/golang/protobuf/ptypes
+github.com/golang/protobuf/ptypes/any
+github.com/golang/protobuf/ptypes/duration
+github.com/golang/protobuf/ptypes/timestamp
 # github.com/gomodule/redigo v2.0.0+incompatible
 github.com/gomodule/redigo/redis
 github.com/gomodule/redigo/internal
@@ -85,11 +95,53 @@ github.com/spf13/viper
 golang.org/x/crypto/ssh/terminal
 # golang.org/x/net v0.0.0-20190213061140-3a22650c66bd
 golang.org/x/net/context
+golang.org/x/net/trace
+golang.org/x/net/internal/timeseries
+golang.org/x/net/http2
+golang.org/x/net/http2/hpack
+golang.org/x/net/http/httpguts
+golang.org/x/net/idna
 # golang.org/x/sys v0.0.0-20181026203630-95b1ffbd15a5
 golang.org/x/sys/unix
 golang.org/x/sys/windows
 # golang.org/x/text v0.3.0
 golang.org/x/text/transform
 golang.org/x/text/unicode/norm
+golang.org/x/text/secure/bidirule
+golang.org/x/text/unicode/bidi
+# google.golang.org/genproto v0.0.0-20180817151627-c66870c02cf8
+google.golang.org/genproto/googleapis/rpc/status
+# google.golang.org/grpc v1.18.0
+google.golang.org/grpc
+google.golang.org/grpc/codes
+google.golang.org/grpc/grpclog
+google.golang.org/grpc/status
+google.golang.org/grpc/balancer
+google.golang.org/grpc/balancer/roundrobin
+google.golang.org/grpc/connectivity
+google.golang.org/grpc/credentials
+google.golang.org/grpc/encoding
+google.golang.org/grpc/encoding/proto
+google.golang.org/grpc/internal
+google.golang.org/grpc/internal/backoff
+google.golang.org/grpc/internal/binarylog
+google.golang.org/grpc/internal/channelz
+google.golang.org/grpc/internal/envconfig
+google.golang.org/grpc/internal/grpcrand
+google.golang.org/grpc/internal/grpcsync
+google.golang.org/grpc/internal/transport
+google.golang.org/grpc/keepalive
+google.golang.org/grpc/metadata
+google.golang.org/grpc/naming
+google.golang.org/grpc/peer
+google.golang.org/grpc/resolver
+google.golang.org/grpc/resolver/dns
+google.golang.org/grpc/resolver/passthrough
+google.golang.org/grpc/stats
+google.golang.org/grpc/tap
+google.golang.org/grpc/balancer/base
+google.golang.org/grpc/credentials/internal
+google.golang.org/grpc/binarylog/grpc_binarylog_v1
+google.golang.org/grpc/internal/syscall
 # gopkg.in/yaml.v2 v2.2.1
 gopkg.in/yaml.v2

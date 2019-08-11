@@ -22,18 +22,23 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"time"
 
+	"github.com/AsynkronIT/protoactor-go/actor"
+	"github.com/AsynkronIT/protoactor-go/remote"
+	"github.com/master-g/playground/internal/learnactor/barebone/barebone"
 	"github.com/master-g/playground/pkg/signal"
 
-	"github.com/master-g/playground/internal/learnactor/barebone/barebone"
 	"github.com/oklog/run"
-
-	"github.com/AsynkronIT/protoactor-go/actor"
 )
 
 func main() {
-	pid := barebone.NewBareActor()
+	runtime.GOMAXPROCS(runtime.NumCPU())
+
+	remote.Start("127.0.0.1:8888")
+
+	pid := barebone.RegisterBareBoneActor()
 
 	var g run.Group
 
@@ -54,6 +59,7 @@ func main() {
 		fmt.Println(err)
 	}
 	actor.EmptyRootContext.Stop(pid)
-
+	remote.Shutdown(true)
+	fmt.Println("10 seconds before exit...")
 	<-time.After(10 * time.Second)
 }

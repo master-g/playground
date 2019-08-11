@@ -60,9 +60,12 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/AsynkronIT/protoactor-go/actor"
+	"github.com/AsynkronIT/protoactor-go/remote"
+	"github.com/master-g/playground/internal/learnactor/messages"
 )
 
 // 用户消息类型, http://proto.actor/docs/messages
@@ -112,5 +115,16 @@ func main() {
 	})
 	pid = rootContext.Spawn(props)
 	rootContext.Send(pid, &hello{Who: "PropsFromFunc"})
+
+	// remote
+	remote.Start("127.0.0.1:9001")
+	remotePid := actor.NewPID("127.0.0.1:8888", "bare")
+	future := actor.EmptyRootContext.RequestFuture(remotePid, &messages.RemoteMessage{Content: "hi from remote client"}, 5*time.Second)
+	resp, err := future.Result()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(resp)
+
 	<-time.After(time.Second)
 }

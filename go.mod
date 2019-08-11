@@ -6,7 +6,9 @@ require (
 	github.com/cenkalti/backoff v2.0.0+incompatible
 	github.com/ethereum/go-ethereum v1.8.17
 	github.com/fsnotify/fsnotify v1.4.7
+	github.com/gogo/protobuf v1.2.1
 	github.com/gomodule/redigo v2.0.0+incompatible
+	github.com/gorilla/websocket v1.4.0
 	github.com/lopnur/kroran v0.0.0-20181016032010-ec04e2430c78
 	github.com/lopnur/lnutils v0.0.0-20180827085805-95a93446a63f
 	github.com/mitchellh/go-homedir v1.0.0

@@ -22,10 +22,12 @@ package barebone
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/AsynkronIT/protoactor-go/actor"
 	"github.com/AsynkronIT/protoactor-go/mailbox"
+	"github.com/master-g/playground/internal/learnactor/messages"
 )
 
 type BareActor struct {
@@ -40,10 +42,13 @@ func bareActorProducer() actor.Producer {
 	}
 }
 
-func NewBareActor() *actor.PID {
+func RegisterBareBoneActor() *actor.PID {
 	props := actor.PropsFromProducer(bareActorProducer()).WithMailbox(mailbox.Bounded(20000))
-	rootContext := actor.EmptyRootContext
-	pid := rootContext.Spawn(props)
+	ctx := actor.EmptyRootContext
+	pid, err := ctx.SpawnNamed(props, "bare")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	return pid
 }
@@ -58,6 +63,10 @@ func (bareActor *BareActor) Receive(ctx actor.Context) {
 		bareActor.stopTicking()
 	case *TickMessage:
 		fmt.Println("tick...")
+	case *messages.RemoteMessage:
+		msg := ctx.Message().(*messages.RemoteMessage)
+		fmt.Println(msg.Content)
+		ctx.Respond(&messages.RemoteMessage{Content: "response from remote"})
 	}
 }
 
