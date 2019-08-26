@@ -28,7 +28,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var addr = flag.String("addr", ":27025", "http service address")
+var addr = flag.String("addr", ":32398", "http service address")
 
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool {
@@ -57,6 +57,6 @@ func logger(w http.ResponseWriter, r *http.Request) {
 func main() {
 	flag.Parse()
 	log.SetFlags(0)
-	http.HandleFunc("/secret", logger)
+	http.HandleFunc("/game", logger)
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
