@@ -23,11 +23,11 @@ package barebone
 import (
 	"fmt"
 	"log"
+	"playground/internal/learnactor/messages"
 	"time"
 
 	"github.com/AsynkronIT/protoactor-go/actor"
 	"github.com/AsynkronIT/protoactor-go/mailbox"
-	"github.com/master-g/playground/internal/learnactor/messages"
 )
 
 type BareActor struct {

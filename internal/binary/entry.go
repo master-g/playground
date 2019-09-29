@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/master-g/playground/internal/mnemonic"
+	"playground/internal/mnemonic"
 )
 
 // Entry for this package

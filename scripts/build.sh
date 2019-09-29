@@ -17,7 +17,7 @@ golangci-lint run ../...
 # build
 echo "==> Building..."
 
-PACKAGE=github.com/master-g/playground/cmd/playground
+PACKAGE=playground/cmd/playground
 COMMIT_HASH=$(git rev-parse --short HEAD)
 BUILD_DATE=$(date +%Y-%m-%dT%TZ%z)
 

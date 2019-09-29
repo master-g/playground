@@ -63,9 +63,10 @@ import (
 	"log"
 	"time"
 
+	"playground/internal/learnactor/messages"
+
 	"github.com/AsynkronIT/protoactor-go/actor"
 	"github.com/AsynkronIT/protoactor-go/remote"
-	"github.com/master-g/playground/internal/learnactor/messages"
 )
 
 // 用户消息类型, http://proto.actor/docs/messages

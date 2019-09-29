@@ -25,10 +25,11 @@ import (
 	"runtime"
 	"time"
 
+	"playground/internal/learnactor/barebone/barebone"
+	"playground/pkg/signal"
+
 	"github.com/AsynkronIT/protoactor-go/actor"
 	"github.com/AsynkronIT/protoactor-go/remote"
-	"github.com/master-g/playground/internal/learnactor/barebone/barebone"
-	"github.com/master-g/playground/pkg/signal"
 
 	"github.com/oklog/run"
 )

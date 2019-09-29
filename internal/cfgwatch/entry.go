@@ -3,7 +3,8 @@ package cfgwatch
 import (
 	"encoding/json"
 
-	"github.com/master-g/playground/pkg/config"
+	"playground/pkg/config"
+
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
