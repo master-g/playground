@@ -41,6 +41,19 @@ var sequence = []int{
 	4, 9, 14, 19, 24, 29, 34, 39, 44, 49,
 }
 
+var magicSequence = []int{
+	0, 10, 20, 30, 40,
+	1, 11, 21, 31, 41,
+	2, 12, 22, 32, 42,
+	3, 13, 23, 33, 43,
+	4, 14, 24, 34, 44,
+	5, 15, 25, 35, 45,
+	6, 16, 26, 36, 46,
+	7, 17, 27, 37, 47,
+	8, 18, 28, 38, 48,
+	9, 19, 29, 39, 49,
+}
+
 type Pattern struct {
 	index int
 	data  []int
@@ -91,6 +104,8 @@ func main() {
 		buf[i] = ' '
 	}
 
+	patternObjs := make([]*Pattern, 0)
+
 	index := 0
 	for y := 0; y < 5; y++ {
 		for x := 0; x < 10; x++ {
@@ -106,6 +121,7 @@ func main() {
 					buf[(sy+yy)*150+(sx+xx)] = r
 				}
 			}
+			patternObjs = append(patternObjs, pattern)
 		}
 	}
 
@@ -117,4 +133,25 @@ func main() {
 		sb.WriteRune('\n')
 	}
 	fmt.Println(sb.String())
+
+	magic := make([]string, 15)
+	for s := 0; s < len(magicSequence); s++ {
+		p := patternObjs[magicSequence[s]]
+		for i := 0; i < 15; i++ {
+			x := i % 5
+			y := i / 5
+			if y == p.data[x]-1 {
+				magic[i] = "1"
+			} else {
+				magic[i] = "0"
+			}
+		}
+		fmt.Printf("{%s},\n", strings.Join(magic, ","))
+	}
+
+	for s := 0; s < len(magicSequence); s++ {
+		i := magicSequence[s]
+		p := patterns[i]
+		fmt.Printf("{%d,%d,%d,%d,%d},\n", p[0], p[1], p[2], p[3], p[4])
+	}
 }
