@@ -22,6 +22,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -134,17 +135,11 @@ func main() {
 	}
 	fmt.Println(sb.String())
 
-	magic := make([]string, 15)
 	for s := 0; s < len(magicSequence); s++ {
+		magic := make([]string, 0)
 		p := patternObjs[magicSequence[s]]
-		for i := 0; i < 15; i++ {
-			x := i % 5
-			y := i / 5
-			if y == p.data[x]-1 {
-				magic[i] = "1"
-			} else {
-				magic[i] = "0"
-			}
+		for i, v := range p.data {
+			magic = append(magic, strconv.Itoa((v-1)*5+i))
 		}
 		fmt.Printf("{%s},\n", strings.Join(magic, ","))
 	}
