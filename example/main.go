@@ -22,6 +22,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 	"strings"
 )
@@ -31,7 +32,7 @@ var patterns = [][]int{
 	{1, 1, 1, 1, 1}, {2, 3, 3, 3, 2}, {1, 2, 2, 2, 1}, {2, 2, 3, 2, 2}, {2, 3, 1, 3, 2}, {1, 3, 2, 1, 3}, {1, 1, 3, 3, 3}, {3, 2, 3, 2, 1}, {1, 3, 3, 3, 3}, {1, 2, 3, 3, 3},
 	{3, 3, 3, 3, 3}, {1, 1, 2, 3, 3}, {3, 2, 2, 2, 3}, {1, 1, 3, 1, 1}, {2, 1, 3, 1, 2}, {1, 3, 2, 3, 1}, {3, 3, 1, 1, 1}, {2, 3, 3, 1, 1}, {3, 3, 3, 3, 1}, {3, 2, 1, 1, 1},
 	{1, 2, 3, 2, 1}, {3, 3, 2, 1, 1}, {1, 2, 1, 2, 1}, {3, 3, 1, 3, 3}, {1, 3, 1, 3, 1}, {3, 1, 2, 1, 3}, {2, 1, 3, 2, 3}, {1, 1, 2, 2, 3}, {1, 1, 1, 1, 3}, {1, 2, 2, 2, 2},
-	{3, 2, 1, 2, 3}, {2, 3, 2, 1, 2}, {3, 2, 3, 2, 3}, {1, 3, 3, 3, 1}, {3, 2, 3, 2, 3}, {3, 2, 1, 1, 2}, {2, 3, 1, 2, 1}, {3, 3, 2, 2, 1}, {2, 1, 2, 1, 2}, {3, 2, 2, 2, 2},
+	{3, 2, 1, 2, 3}, {2, 3, 2, 1, 2}, {3, 2, 3, 2, 3}, {1, 3, 3, 3, 1}, {3, 1, 3, 1, 3}, {3, 2, 1, 1, 2}, {2, 3, 1, 2, 1}, {3, 3, 2, 2, 1}, {2, 1, 2, 1, 2}, {3, 2, 2, 2, 2},
 }
 
 var sequence = []int{
@@ -105,13 +106,14 @@ func main() {
 		buf[i] = ' '
 	}
 
+	patternChecker := make(map[string]bool)
+
 	patternObjs := make([]*Pattern, 0)
 
 	index := 0
 	for y := 0; y < 5; y++ {
 		for x := 0; x < 10; x++ {
 			pattern := NewPattern(sequence[index]+1, patterns[index])
-			index++
 
 			sx := x * 15
 			sy := y * 5
@@ -123,7 +125,14 @@ func main() {
 				}
 			}
 			patternObjs = append(patternObjs, pattern)
+
+			patternChecker[fmt.Sprintf("%v", patterns[index])] = true
+			index++
 		}
+	}
+
+	if len(patternChecker) != len(patterns) {
+		log.Fatalf("invalid patterns, expect %d got %d", len(patterns), len(patternChecker))
 	}
 
 	sb := &strings.Builder{}
@@ -135,6 +144,8 @@ func main() {
 	}
 	fmt.Println(sb.String())
 
+	fmt.Println("// indices")
+
 	for s := 0; s < len(magicSequence); s++ {
 		magic := make([]string, 0)
 		p := patternObjs[magicSequence[s]]
@@ -143,6 +154,8 @@ func main() {
 		}
 		fmt.Printf("{%s},\n", strings.Join(magic, ","))
 	}
+
+	fmt.Println("// magics")
 
 	for s := 0; s < len(magicSequence); s++ {
 		i := magicSequence[s]
