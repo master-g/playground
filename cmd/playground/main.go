@@ -4,6 +4,7 @@ import (
 	"flag"
 	"math/rand"
 	"net/http"
+	"playground/internal/image"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -32,5 +33,6 @@ func fileServer() {
 }
 
 func main() {
-	fileServer()
+	// fileServer()
+	image.Entry3()
 }

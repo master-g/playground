@@ -21,3 +21,8 @@
 
 # Executable
 bin/
+
+# vendor
+vendor
+go.mod
+go.sum

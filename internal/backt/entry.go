@@ -3,6 +3,7 @@ package backt
 import (
 	"errors"
 	"math/rand"
+	"playground/pkg/signal"
 
 	"github.com/cenkalti/backoff"
 	log "github.com/sirupsen/logrus"
@@ -10,7 +11,8 @@ import (
 
 // Entry for this package
 func Entry() {
-	go signal.Start()
+	cancel := make(chan struct{})
+	go signal.Start(cancel)
 	go worker()
 
 	<-signal.InterruptChan

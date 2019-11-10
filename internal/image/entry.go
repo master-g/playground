@@ -4,6 +4,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"image"
+	"image/color"
 	"image/png"
 	"io/ioutil"
 	"log"
@@ -54,4 +55,15 @@ func Entry2() {
 			toImg.Close()
 		}
 	}
+}
+
+func Entry3() {
+	m := image.NewRGBA(image.Rect(0, 0, 1, 1))
+	m.Set(0, 0, color.RGBA{0, 0, 0, 77})
+	toImage, err := os.Create("symbol_mask.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	png.Encode(toImage, m)
+	toImage.Close()
 }
