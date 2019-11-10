@@ -5,7 +5,6 @@ import (
 	"math/rand"
 
 	"github.com/cenkalti/backoff"
-	"github.com/lopnur/kroran/pkg/signal"
 	log "github.com/sirupsen/logrus"
 )
 

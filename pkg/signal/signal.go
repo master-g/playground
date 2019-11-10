@@ -21,6 +21,7 @@
 package signal
 
 import (
+	"context"
 	"os"
 	"os/signal"
 	"syscall"
@@ -33,14 +34,33 @@ var (
 	interruptSignals = []os.Signal{syscall.SIGTERM, os.Interrupt}
 )
 
-// Start waiting UNIX system signal
-func Start(cancel chan struct{}) {
+func Start() {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, interruptSignals...)
+	defer close(InterruptChan)
+
+	<-c
+}
+
+func StartWithContext(ctx context.Context) {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, interruptSignals...)
+	defer close(InterruptChan)
+
+	select {
+	case <-c:
+	case <-ctx.Done():
+	}
+}
+
+// Start waiting UNIX system signal
+func StartWithCanel(cancel chan struct{}) {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, interruptSignals...)
+	defer close(InterruptChan)
 
 	select {
 	case <-c:
 	case <-cancel:
 	}
-	close(InterruptChan)
 }

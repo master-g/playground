@@ -3,8 +3,6 @@ package cfgwatch
 import (
 	"encoding/json"
 
-	"github.com/lopnur/kroran/pkg/signal"
-
 	"github.com/master-g/playground/pkg/config"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
