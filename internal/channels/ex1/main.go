@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+// M receivers, one sender
+
 func main() {
 	rand.Seed(time.Now().Unix())
 	log.SetFlags(0)
@@ -22,6 +24,8 @@ func main() {
 	go func() {
 		for {
 			if value := rand.Intn(Max); value == 0 {
+				// The only sender can close the
+				// channel at any time safely.
 				close(dataCh)
 				return
 			} else {
@@ -36,6 +40,9 @@ func main() {
 		go func() {
 			defer wgReceivers.Done()
 
+			// Receive values until dataCh is
+			// closed and the value buffer queue
+			// of dataCh becomes empty.
 			for value := range dataCh {
 				log.Println(value)
 			}
