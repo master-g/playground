@@ -1,2 +1,2 @@
 # playground
-personal go playground
+personal coding playground
