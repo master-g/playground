@@ -1,0 +1,16 @@
+[package]
+name = "painter"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "painter"
+
+[dependencies]
+image = { workspace = true }
+winit = { workspace = true }
+cgmath = { workspace = true }
+env_logger = { workspace = true }
+log = { workspace = true }
+wgpu = { workspace = true }
+pollster = { workspace = true }
