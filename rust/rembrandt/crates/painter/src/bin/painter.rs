@@ -1,5 +1,5 @@
 use painter::tutorials::*;
 
 fn main() {
-  chpt03_pipeline::entry();
+  pollster::block_on(chpt05_texture::run());
 }

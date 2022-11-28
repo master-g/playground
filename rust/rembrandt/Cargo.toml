@@ -16,3 +16,6 @@ log = "0.4.17"
 pollster = "0.2.5"
 wgpu = "0.14.0"
 winit = "0.27.5"
+bytemuck = { version = "1.12.3", features = ["derive"] }
+anyhow = "1.0.66"
+cfg-if = "1"

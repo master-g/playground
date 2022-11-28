@@ -100,6 +100,7 @@ impl State {
     }
   }
 
+  #[allow(deprecated)]
   fn input(&mut self, _event: &WindowEvent) -> bool {
     match _event {
       WindowEvent::CursorMoved {
